@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="minireset.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body x-data="{people:0, sqrMeters:100}">
+    <div class="main-container">
+        <section class="sqr_meters-container">
+            <span class="sqr_meters-sentence js-inputWrapperSentence">
+                O meu estabelecimento tem <input class="sqr_meters-input js-sqrMeterInput" x-model="sqrMeters" inputmode="numeric" type="text"> m<sup>2</sup>
+                <div class="sqr_meters-info js-informationContainer"></div>
+            </span>
+        </section>
+        <section class="result-container">
+            <span class="result-number" :class="{'-danger' : people >= sqrMeters*0.05}" x-html="people"></span>
+            <p x-show="sqrMeters>0" class="result-limit">Limite de pessoas: <span x-html="Math.floor(sqrMeters*0.05)"></span></p> 
+            <p class="result-warning" x-show="people >= sqrMeters*0.05 && sqrMeters>0" x-transition:enter="-visible" :class="{'-danger' : people > sqrMeters*0.05}">⚠️ O limite foi
+                <span x-show="people === sqrMeters*0.05">atingido.</span>
+                <span x-show="people > sqrMeters*0.05">excedido.</span>
+            </p>
+        </section>
+        <section class="buttons-container">
+            <button class="button js-counterBtn" @click="people--" :disabled="people < 1 || inputError">-</button>
+            <button class="button js-counterBtn" @click="people++" :disabled="inputError">+</button>            
+        </section>
+
+        
+    </div>
+
+    <div class="noise-bg-fx"></div>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,311 @@
+/* thanks https://css-tricks.com/neumorphism-and-css/*/
+
+:root {
+  --text-font: "Noto Sans JP", sans-serif;
+  --numbers-font: "Cousine", monospace;
+  --numbers-bold: 700;
+  --info-color: rgba(0, 0, 0, 0);
+  --danger-color: #dc3545;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: rgb(24, 24, 24);
+  color: white;
+  font-family: var(--text-font);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  grid-template-rows: calc(10% - 2rem) 80% calc(10% + 2rem);
+}
+
+.result-number {
+  font-family: var(--numbers-font);
+  font-weight: var(--numbers-bold);
+  /* font-family: monospace, monospace; */
+  /* font-variant-numeric: tabular-nums; */
+  font-size: 150px;
+
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.65);
+}
+
+.result-number.-danger {
+  color: var(--danger-color);
+}
+
+.result-warning {
+  --warning-color: #ffc107;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem;
+  background-color: var(--warning-color);
+  border-radius: 6px;
+  box-shadow: 0 0 15px 1px var(--warning-color);
+  transition: all ease 0.3s;
+  white-space: nowrap;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
+}
+
+.result-warning.-visible {
+  animation: shake 1s ease forwards;
+}
+
+.result-warning.-leave {
+  opacity: 0;
+}
+
+.result-warning.-danger {
+  --warning-color: #dc3545;
+}
+
+.buttons-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.result-container {
+  width: 95%;
+  height: 95%;
+  border-radius: 15px;
+  /* background-color: red; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* border: 1px solid red; */
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.3),
+    -8px -8px 12px 0 rgba(207, 207, 207, 0.1),
+    -12px -12px 16px 0 rgba(0, 0, 0, 0.3) inset,
+    8px 8px 12px 0 rgba(207, 207, 207, 0.1) inset;
+  overflow: hidden;
+  position: relative;
+}
+
+.button {
+  background: rgb(255, 187, 0);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 187, 0, 0.75) 0%,
+    rgba(255, 187, 0, 1) 50%,
+    rgba(255, 205, 66, 1) 100%
+  );
+  color: white;
+  height: 100%;
+  width: 200px;
+  border-radius: 25px;
+  box-shadow: 0 0 0 3px rgba(80, 80, 80, 0.705),
+    12px 12px 16px 0 rgba(0, 0, 0, 0.65),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.18),
+    2px 2px 0 2px rgba(255, 187, 0, 0.35) inset,
+    -2px -2px 0 2px rgba(224, 164, 0, 0.63) inset;
+  overflow: hidden;
+
+  font-family: var(--numbers-font);
+  font-weight: var(--numbers-bold);
+  font-size: 60px;
+  text-shadow: 0 2px 4px rgba(122, 90, 0, 0.55);
+  height: 80%;
+  display: grid;
+  place-items: center;
+
+  transition: all 0.2s ease;
+}
+
+.button:first-of-type {
+  margin-right: 25px;
+}
+
+.button:disabled {
+  filter: grayscale(100%);
+  opacity: 0.75;
+}
+
+.sqr_meters-sentence {
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.65);
+  position: relative;
+}
+
+.sqr_meters-info {
+  text-shadow: none;
+  font-size: 0.85em;
+  position: absolute;
+  top: 185%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  background-color: var(--info-color);
+  pointer-events: none;
+  min-width: 300px;
+  min-height: 50px;
+  border-radius: 6px;
+  padding: 0.5rem;
+  z-index: 2;
+  opacity: 0;
+  box-shadow: 0 0 15px 1px var(--info-color);
+  transition: background-color 0.45s ease, opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.sqr_meters-info::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: var(--info-color);
+  position: absolute;
+  top: -5px;
+  left: 80%;
+  transform: rotate(45deg);
+  z-index: -1;
+  transition: background-color 0.45s ease, opacity 0.45s ease,
+    trasform 0.45s ease;
+}
+
+.sqr_meters-info.-error,
+.sqr_meters-info.-info {
+  transform: translate3d(-50%, 0, 0);
+  color: white;
+  opacity: 1;
+  transition: background-color 0.45s ease, opacity 0.45s ease,
+    trasform 0.45s ease;
+}
+
+.sqr_meters-info.-error {
+  --info-color: #dc3545;
+  transform: translate3d(-1px, 0, 0) translateX(-50%);
+  animation: shake 0.75s ease forwards;
+}
+
+.sqr_meters-info.-info {
+  --info-color: #5959ff;
+}
+
+/*thanks for the animation https://css-tricks.com/snippets/css/shake-css-keyframe-animation/*/
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0) translateX(-50%);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0) translateX(-50%);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0) translateX(-50%);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0) translateX(-50%);
+  }
+}
+
+/* .sqr_meters-sentence::after{
+
+  content:attr(data-info);
+  position: absolute;
+
+} */
+
+.sqr_meters-input {
+  font-family: var(--numbers-font);
+  font-size: 1.5em;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  color: white;
+}
+
+/*https://css-tricks.com/snippets/css/animated-grainy-texture/*/
+.noise-bg-fx::before {
+  /* animation: grain 8s steps(10) infinite; */
+  background-image: url(./images/noise.jpg);
+  content: "";
+  height: 300%;
+  left: -50%;
+  opacity: 0.3;
+  position: fixed;
+  top: -110%;
+  width: 300%;
+  opacity: 0.05;
+  /* animation: grain 5s steps(10) infinite; */
+}
+
+/* @keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+} */
+
+@media only screen and (max-width: 450px) {
+  .button {
+    width: 42vw;
+    font-size: 45px;
+  }
+
+  .button:first-of-type {
+    margin-right: 15px;
+  }
+
+  .main-container {
+    grid-template-rows: calc(15% - 2rem) 75% calc(10% + 2rem);
+  }
+}
+
+@media (hover: hover) {
+  .button:not(:disabled):hover {
+    padding-bottom: 0.25rem;
+    text-shadow: 0 4px 8px rgba(122, 90, 0, 0.75);
+  }
+}
