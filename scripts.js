@@ -3,6 +3,7 @@ const allCounterButtons = document.getElementsByClassName("js-counterBtn");
 const inputWrapperSentence = document.querySelector(".js-inputWrapperSentence");
 const informationContainer = document.querySelector(".js-informationContainer");
 const sqrMetersInput = document.querySelector(".js-sqrMeterInput");
+
 let inputError = false;
 function validateSquareMeters(input) {
   let inputedVal = input.value.trim();
@@ -12,7 +13,7 @@ function validateSquareMeters(input) {
   let isError,
     isInfo = false;
 
-    inputError = false;
+  inputError = false;
 
   if (parseInt(inputedVal) === 0 || inputedVal.length < 1) {
     //empty or 0
@@ -72,16 +73,49 @@ function resizeInput(value) {
 sqrMetersInput.addEventListener("input", function () {
   validateSquareMeters(this);
 
-  if (this.value < 2 || isMobile) {
-    this.size = 1;
+  if (this.value.length < 2 || isMobile || this.value.length >= 20) {
     return;
   }
-
   this.size = resizeInput(this.value);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-
   sqrMetersInput.size = resizeInput(sqrMetersInput.value);
 });
 
+// const introAnimationEl = document.querySelectorAll(".-introAnimation");
+// for(let i = 0; i<introAnimationEl.length;i++){
+//   introAnimationEl[i].addEventListener("animationend", function () {
+//     this.classList.remove("-introAnimation");
+//   });
+// }
+
+
+let introScreen = {
+  elements: {
+    introBtn: document.querySelector(".js-introButton"),
+    checkbox: document.querySelector(".js-introCheckbox"),
+    introMsg: document.querySelector(".js-introMessage"),
+    hiddenEl: document.querySelectorAll(".-hidden"),
+    mainCont: document.querySelector(".js-mainCont"),
+  },
+  change: function () {
+    let self = this;
+
+    if (self.elements.checkbox.checked) {
+      document.documentElement.requestFullscreen();
+    }
+
+    self.elements.introMsg.classList.add("-hidden");
+
+    for (let i = 0; i < self.elements.hiddenEl.length; i++) {
+      self.elements.hiddenEl[i].classList.remove("-hidden");
+    }
+
+    self.elements.mainCont.classList.remove("-intro");
+  },
+};
+
+introScreen.elements.introBtn.addEventListener("click", function () {
+  introScreen.change();
+});

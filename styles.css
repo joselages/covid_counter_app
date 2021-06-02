@@ -3,14 +3,16 @@
 :root {
   --text-font: "Noto Sans JP", sans-serif;
   --numbers-font: "Cousine", monospace;
-  --numbers-bold: 700;
+  --bold: 700;
   --info-color: rgba(0, 0, 0, 0);
+  --main-color: rgb(255, 187, 0);
   --danger-color: #dc3545;
 }
 
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -19,14 +21,26 @@ body {
   font-family: var(--text-font);
 }
 
+.-hidden {
+  visibility: hidden;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(10px);
+}
+
+a {
+  color: #649bff;
+}
+
 button {
   border: none;
   cursor: pointer;
 }
 
 .main-container {
-  width: 100%;
+  width: 98%;
   height: 100%;
+  margin: 0 auto;
   position: relative;
   z-index: 2;
   display: grid;
@@ -34,9 +48,13 @@ button {
   grid-template-rows: calc(10% - 2rem) 80% calc(10% + 2rem);
 }
 
+.main-container.-intro {
+  grid-template-rows: 1% 98% 1%;
+}
+
 .result-number {
   font-family: var(--numbers-font);
-  font-weight: var(--numbers-bold);
+  font-weight: var(--bold);
   /* font-family: monospace, monospace; */
   /* font-variant-numeric: tabular-nums; */
   font-size: 150px;
@@ -82,17 +100,11 @@ button {
   justify-content: center;
 }
 
-.result-container {
+.middle-container {
   width: 95%;
   height: 95%;
   border-radius: 15px;
   /* background-color: red; */
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   /* border: 1px solid red; */
   box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.3),
     -8px -8px 12px 0 rgba(207, 207, 207, 0.1),
@@ -102,8 +114,71 @@ button {
   position: relative;
 }
 
-.button {
-  background: rgb(255, 187, 0);
+.intro-message {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--bold);
+  transform: translateX(-15px);
+  opacity: 0;
+  animation-delay: 0.25s;
+}
+
+.intro-txt,
+.intro-list,
+.intro-button,
+.intro-label {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-top: 1.25rem;
+}
+
+.intro-title,
+.intro-txt,
+.intro-list,
+.intro-label {
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.65);
+}
+
+.intro-txt,
+.intro-list,
+.intro-label {
+  transform: translateX(-15px);
+  opacity: 0;
+  animation-delay: 0.35s;
+}
+
+.intro-label {
+  font-size: 1em;
+  user-select: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.intro-checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.result-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+}
+
+.button,
+.intro-button {
+  background: var(--main-color);
   background: linear-gradient(
     135deg,
     rgba(255, 187, 0, 0.75) 0%,
@@ -122,7 +197,7 @@ button {
   overflow: hidden;
 
   font-family: var(--numbers-font);
-  font-weight: var(--numbers-bold);
+  font-weight: var(--bold);
   font-size: 60px;
   text-shadow: 0 2px 4px rgba(122, 90, 0, 0.55);
   height: 80%;
@@ -132,6 +207,32 @@ button {
   transition: all 0.2s ease;
 }
 
+.intro-button {
+  width: initial;
+  height: initial;
+  padding: 1rem;
+  font-size: 1.25em;
+  border-radius: 10px;
+  margin-top: 20px;
+  transform: translateX(-15px);
+  opacity: 0;
+  animation-delay: 0.45s;
+}
+
+.-introAnimation{
+  animation-name: introShow;
+  animation-duration: 1s;
+  animation-timing-function:  cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes introShow {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .button:first-of-type {
   margin-right: 25px;
 }
@@ -139,6 +240,10 @@ button {
 .button:disabled {
   filter: grayscale(100%);
   opacity: 0.75;
+}
+
+.sqr_meters-container {
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
 }
 
 .sqr_meters-sentence {
@@ -288,6 +393,10 @@ button {
   }
 } */
 
+.intro-message.-hidden {
+  position: absolute;
+}
+
 @media only screen and (max-width: 450px) {
   .button {
     width: 42vw;
@@ -306,6 +415,10 @@ button {
 @media (hover: hover) {
   .button:not(:disabled):hover {
     padding-bottom: 0.25rem;
+    text-shadow: 0 4px 8px rgba(122, 90, 0, 0.75);
+  }
+
+  .intro-button:hover {
     text-shadow: 0 4px 8px rgba(122, 90, 0, 0.75);
   }
 }
