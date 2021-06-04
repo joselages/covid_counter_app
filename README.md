@@ -19,7 +19,7 @@ O design é inspirado no dark theme do Windows 10 e na tendência de Neumorphism
 ## Recursos utilizados
 
 - [minireset.css](https://jgthms.com/minireset.css/) - CSS Reset
-- [AlpineJSNeumorphism](https://github.com/alpinejs/alpine) - framework JS
+- [AlpineJS](https://github.com/alpinejs/alpine) - framework JS
 - [Neumorphism and CSS](https://css-tricks.com/neumorphism-and-css)
 - [“Shake” CSS Keyframe Animation](https://css-tricks.com/snippets/css/shake-css-keyframe-animation/)
 - [Animated Grainy Texture](https://css-tricks.com/snippets/css/animated-grainy-texture/)
