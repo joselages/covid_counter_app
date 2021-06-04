@@ -1,4 +1,4 @@
-# [😷 Contador de clientes](https://joselag.es/news_station/) 📰
+# [😷 Contador de clientes](https://quirky-cori-50a37e.netlify.app/)
 
 Mantenha-se em segurança e tome nota do [número de pessoas no seu estabelecimento](https://dre.pt/web/guest/legislacao-consolidada/-/lc/137618391/202007150100/73849113/diploma/indice).
 
