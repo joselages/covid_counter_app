@@ -1,4 +1,4 @@
-# [😷 Contador de clientes](https://quirky-cori-50a37e.netlify.app/)
+# [😷 Contador de clientes](https://contador-clientes-covid.netlify.app/)
 
 Mantenha-se em segurança e tome nota do [número de pessoas no seu estabelecimento](https://dre.pt/web/guest/legislacao-consolidada/-/lc/137618391/202007150100/73849113/diploma/indice).
 
@@ -24,4 +24,5 @@ O design é inspirado no dark theme do Windows 10 e na tendência de Neumorphism
 - [Neumorphism and CSS](https://css-tricks.com/neumorphism-and-css)
 - [“Shake” CSS Keyframe Animation](https://css-tricks.com/snippets/css/shake-css-keyframe-animation/)
 - [Animated Grainy Texture](https://css-tricks.com/snippets/css/animated-grainy-texture/)
+- [Meta Tags](https://metatags.io/) - SEO metatags generator
 
