@@ -8,7 +8,8 @@ Mantenha-se em segurança e tome nota do [número de pessoas no seu estabelecime
 
 ---
 
-Com este projeto quis por em prática o meu conhecimentos e utilizar **vanilla Javascript**.Experimentei a framework **[Alpine JS](https://github.com/alpinejs/alpine)**, utilizando as suas capacidades reativas para o funcionamento base do contador.
+Com este projeto quis por em prática o meu conhecimentos e utilizar **vanilla Javascript**.
+Experimentei a framework **[Alpine JS](https://github.com/alpinejs/alpine)**, utilizando as suas capacidades reativas para o funcionamento base do contador.
 
 O design é inspirado no dark theme do Windows 10 e na tendência de Neumorphism
 
